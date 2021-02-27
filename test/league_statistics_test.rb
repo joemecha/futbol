@@ -18,11 +18,14 @@ class LeagueStatisticsTest < Minitest::Test
     assert_equal 32, @league_stats.count_of_teams
   end
 
-  # def test_winningest_home_team
-  #   @league_stats.highest_scoring_home_team
-  # end
-
   def test_least_visitor_goals_by_team
     assert_equal 27, @league_stats.least_visitor_goals_by_team
+
+  def test_best_offense
+    assert_equal "54", @league_stats.best_offense
+  end
+
+  def test_worst_offense
+    assert_equal "7", @league_stats.worst_offense
   end
 end
