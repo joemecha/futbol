@@ -42,11 +42,11 @@ class GameManagerTest < Minitest::Test
     assert_equal expected, @game_manager.number_of_season_games
   end
 
-  def test_average_goals_per_game
-    expected = {20122013=>3.8, 20132014=>4.27, 20162017=>3.8, 20172018=>4.75, 20152016=>4.2}
-
-    assert_equal expected, @game_manager.average_goals_per_match
-  end
+  # def test_average_goals_per_game
+  #   expected = {20122013=>3.8, 20132014=>4.27, 20162017=>3.8, 20172018=>4.75, 20152016=>4.2}
+  #
+  #   assert_equal expected, @game_manager.average_goals_per_match
+  # end
 
   def test_average_goals_by_season
     expected = {20122013=>3.8, 20132014=>4.27, 20162017=>3.8, 20172018=>4.75, 20152016=>4.2}
@@ -56,5 +56,9 @@ class GameManagerTest < Minitest::Test
 
   def test_games_by_season
     assert_equal @game_manager.games_by_season.keys.first, 20122013
+  end
+
+  def test_home_wins
+    @game_manager.home_wins
   end
 end

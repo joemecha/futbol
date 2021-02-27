@@ -43,4 +43,9 @@ class TeamManagerTest < Minitest::Test
   # def test_rival
   #
   # end
+
+  def test_team_name_by_id
+    assert_equal 'Sporting Kansas City', @team_manager.team_name_by_id(5)
+    assert_equal 'DC United', @team_manager.team_name_by_id(14)
+  end
 end

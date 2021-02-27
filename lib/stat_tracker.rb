@@ -11,6 +11,8 @@ class StatTracker
 
   def initialize(locations)
     @game_manager = GameManager.new(locations[:games])
+    @team_manager = TeamManager.new(locations[:teams])
+    @league_stats = LeagueStatistics.new(locations)
   end
 
   def highest_total_score
@@ -41,5 +43,13 @@ class StatTracker
 
   def average_goals_per_game
     @game_manager.average_goals_per_match
+  end
+
+  def highest_scoring_home_team
+    @team_manager.team_name_by_id(@league_stats.most_home_goals_by_team)
+  end
+
+  def lowest_scoring_visitor
+    @team_manager.team_name_by_id(@league_stats.least_visitor_goals_by_team)
   end
 end

@@ -1,7 +1,7 @@
 require "./test/test_helper"
 
 class StatTrackerTest < Minitest::Test
-  
+
   def setup
     @games = './data/games.csv'
     @game_teams = './data/game_teams.csv'
@@ -29,4 +29,12 @@ class StatTrackerTest < Minitest::Test
   # def test_it_has_attributes
   #   self.from_csv(@locations)
   # end
+
+  def test_name_of_highest_scoring_home_team
+    assert_equal 'Reign FC', @tracker.highest_scoring_home_team
+  end
+
+  def test_lowest_scoring_visitor
+    assert_equal 'San Jose Earthquakes', @tracker.lowest_scoring_visitor
+  end
 end
