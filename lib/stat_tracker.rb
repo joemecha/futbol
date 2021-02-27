@@ -1,8 +1,13 @@
-require './lib/manager/team_manager'
-require './lib/manager/game_team_manager'
-require './lib/manager/game_manager'
+require_relative 'team_manager'
+require_relative 'game_team_manager'
+require_relative 'game_manager'
 
 class StatTracker
+# required by rspec, still doesn't work b/c of module
+  # def self.from_csv(locations)
+  #   StatTracker.new(locations)
+  # end
+
   def initialize(locations)
     @game_manager = GameManager.new(locations[:games])
     @team_manager = TeamManager.new(locations[:teams])

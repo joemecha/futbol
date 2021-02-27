@@ -1,5 +1,5 @@
-require './lib/game'
-require './modules/data_loadable'
+require_relative 'game'
+require_relative 'data_loadable'
 
 class GameManager
   include DataLoadable
