@@ -39,5 +39,4 @@ class Game
       :tie
     end
   end
-
 end

@@ -11,7 +11,7 @@ class TeamManager
   end
 
   def best_season
-    
+
     # Description: Season with the highest win percentage for a team.
     # Return Value: String
   end
@@ -49,4 +49,11 @@ class TeamManager
 #     #              against the given team.
 #     # Return Value: String
 #   end
+
+  def team_name_by_id(desired_id)
+    matching_id = @teams.find do |team|
+      team.team_id == desired_id
+    end
+    matching_id.team_name
+  end
 end
