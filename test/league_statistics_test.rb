@@ -17,4 +17,12 @@ class LeagueStatisticsTest < Minitest::Test
   def test_count_of_teams
     assert_equal 32, @league_stats.count_of_teams
   end
+
+  def test_best_offense
+    assert_equal "54", @league_stats.best_offense
+  end
+
+  def test_worst_offense
+    assert_equal "7", @league_stats.worst_offense
+  end
 end
