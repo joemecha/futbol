@@ -3,12 +3,6 @@ require './lib/manager/game_team_manager'
 require './lib/manager/game_manager'
 
 class StatTracker
-
-  # attr_reader
-  # def self.from_csv(locations)
-  #   StatTracker.new(locations)
-  # end
-
   def initialize(locations)
     @game_manager = GameManager.new(locations[:games])
     @team_manager = TeamManager.new(locations[:teams])
@@ -16,12 +10,10 @@ class StatTracker
   end
 
   def highest_total_score
-    #        game object               tack on total_score
     @game_manager.highest_scoring_game.total_score
   end
 
   def lowest_total_score
-    #        game object               tack on total_score
     @game_manager.lowest_scoring_game.total_score
   end
 
@@ -45,11 +37,35 @@ class StatTracker
     @game_manager.average_goals_per_match
   end
 
+  def average_goals_by_season
+    @game_manager.average_scores_by_season
+  end
+#=====================================
+  def count_of_teams
+    @league_stats.number_of_teams
+  end
+
+  def best_offense
+    @team_manager.team_name_by_id(@league_stats.best_attackers)
+  end
+
+  def worst_offense
+    @team_manager.team_name_by_id(@league_stats.worst_attackers)
+  end
+
+  def highest_scoring_visitor
+    @team_manager.team_name_by_id(@league_stats.most_goals_by_away_team)
+  end
+
   def highest_scoring_home_team
     @team_manager.team_name_by_id(@league_stats.most_home_goals_by_team)
   end
 
   def lowest_scoring_visitor
     @team_manager.team_name_by_id(@league_stats.least_visitor_goals_by_team)
+  end
+
+  def lowest_scoring_home_team
+    @team_manager.team_name_by_id(@league_stats.least_home_goals_by_team)
   end
 end

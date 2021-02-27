@@ -1,4 +1,3 @@
-
 require "./test/test_helper"
 
 class TeamTest < Minitest::Test

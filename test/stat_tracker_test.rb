@@ -15,20 +15,60 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_exists
-    # require "pry";binding.pry
     assert_instance_of StatTracker, @tracker
   end
 
-  # def test_load_data
-  #   # require "pry";binding.pry
-  #   assert_equal [], @tracker.load_data(@games, GameManager)
-  #   assert_equal [], @tracker.load_data(@game_teams, GameTeamManager)
-  #   assert_equal [], @tracker.load_data(@teams, TeamManager)
-  # end
+  def test_highest_total_score
+    assert_equal 11, @tracker.highest_total_score
+  end
 
-  # def test_it_has_attributes
-  #   self.from_csv(@locations)
+  def test_lowest_total_score
+    assert_equal 0, @tracker.lowest_total_score
+  end
+# ===== Ask about testing bc tested w/ stubs in game_manager file ====
+  # def test_percentage_home_wins
+  #   assert_equal , @tracker.test_percentage_home_wins
   # end
+  #
+  # def test_percentage_visitor_wins
+  #   assert_equal , @tracker.percentage_visitor_wins
+  # end
+  #
+  # def test_percentage_ties
+  #   assert_equal , @tracker.percentage_ties
+  # end
+# ==================================================================
+  def test_count_of_games_by_season
+    expected = {20122013=>806, 20162017=>1317, 20142015=>1319, 20152016=>1321, 20132014=>1323, 20172018=>1355}
+
+    assert_equal expected, @tracker.count_of_games_by_season
+  end
+
+  def test_average_goals_per_game
+    assert_equal 4.22, @tracker.average_goals_per_game
+  end
+
+  def test_average_goals_by_season
+    expected = {20122013=>4.12, 20162017=>4.23, 20142015=>4.14, 20152016=>4.16, 20132014=>4.19, 20172018=>4.44}
+
+    assert_equal expected, @tracker.average_goals_by_season
+  end
+
+  def test_count_of_teams
+    assert_equal 32, @tracker.count_of_teams
+  end
+
+  def test_best_offense
+    assert_equal 'Reign FC', @tracker.best_offense
+  end
+
+  def test_worst_offense
+    assert_equal 'Utah Royals FC', @tracker.worst_offense
+  end
+
+  def test_name_of_highest_scoring_visitor
+    assert_equal 'FC Dallas', @tracker.highest_scoring_visitor
+  end
 
   def test_name_of_highest_scoring_home_team
     assert_equal 'Reign FC', @tracker.highest_scoring_home_team
@@ -36,5 +76,9 @@ class StatTrackerTest < Minitest::Test
 
   def test_lowest_scoring_visitor
     assert_equal 'San Jose Earthquakes', @tracker.lowest_scoring_visitor
+  end
+
+  def test_lowest_scoring_home_team
+    assert_equal 'Utah Royals FC', @tracker.lowest_scoring_home_team
   end
 end
