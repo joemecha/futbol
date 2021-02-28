@@ -28,15 +28,8 @@ class Game
   end
 
   def winner
-    # return :home if  @home_goals > @away_goals
-    # return :visitor if @home_goals < @away_goals
-    # return :tie
-    if @home_goals > @away_goals
-      :home
-    elsif @home_goals < @away_goals
-      :away
-    else
-      :tie
-    end
+    return :home if  @home_goals > @away_goals
+    return :visitor if @home_goals < @away_goals
+    return :tie
   end
 end

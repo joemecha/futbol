@@ -1,5 +1,5 @@
-require './lib/game'
-require './modules/data_loadable'
+require_relative 'game'
+require_relative 'data_loadable'
 
 class GameManager
   include DataLoadable
@@ -12,6 +12,12 @@ class GameManager
 
   def highest_scoring_game
     @games.max_by do |game|
+      game.total_score
+    end
+  end
+
+  def lowest_scoring_game
+    @games.min_by do |game|
       game.total_score
     end
   end
@@ -35,21 +41,15 @@ class GameManager
   end
 
   def calculate_percentage_home_wins
-    ((home_wins.count.to_f / @games.count) * 100).round(2)
+    ((home_wins.count.to_f / games.count) * 100).round(2)
   end
 
   def calculate_percentage_away_wins
-    ((away_wins.count.to_f / @games.count) * 100).round(2)
+    ((away_wins.count.to_f / games.count) * 100).round(2)
   end
 
   def calculate_percentage_ties
-    ((ties.count.to_f / @games.count) * 100).round(2)
-  end
-
-  def lowest_scoring_game
-    @games.min_by do |game|
-      game.total_score
-    end
+    ((ties.count.to_f / games.count) * 100).round(2)
   end
 
   def number_of_season_games
@@ -69,10 +69,10 @@ class GameManager
     @games.each do |game|
       all_goals += game.total_score
     end
-     (all_goals.to_f / @games.count).round(2)
+     (all_goals.to_f / games.count).round(2)
   end
 
-  def average_goals_by_season
+  def average_scores_by_season
     games_by_season.transform_values! do |array|
       avg = array.map do |game|
         game.total_score

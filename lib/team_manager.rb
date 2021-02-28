@@ -1,5 +1,5 @@
-require "./lib/team"
-require './modules/data_loadable'
+require_relative "team"
+require_relative 'data_loadable'
 
 class TeamManager
   include DataLoadable
