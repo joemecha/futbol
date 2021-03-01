@@ -3,9 +3,11 @@ require "./test/test_helper"
 class TeamManagerTest < Minitest::Test
 
   def setup
-    @team_data = './data/teams.csv'
-
-    @team_manager = TeamManager.new(@team_data)
+    @data = { games: './data/games.csv',
+              teams: './data/teams.csv',
+              game_teams: './data/game_teams.csv'
+            }
+    @team_manager = TeamManager.new(@data)
   end
 
   def test_it_exists
@@ -16,14 +18,19 @@ class TeamManagerTest < Minitest::Test
     assert_equal ({:team_id=>6, :franchise_id=>6, :team_name=>"FC Dallas", :abbreviation=>"DAL", :link=>"/api/v1/teams/6"}),@team_manager.info_by_id(6)
   end
 
-  # def test_team_info
-  #
-  # end
-  #
-  # def test_best_season
-  #
-  # end
-  #
+  def test_average_win_percentage
+    assert_equal 49.22, @team_manager.average_win_percentage(6)
+  end
+
+  def test_all_games_by_season
+    assert_instance_of Hash, @team_manager.team_all_games_by_season(1)
+  end
+
+  def test_best_season
+    # skip
+    assert_equal "20132014", @team_manager.best_season(6)
+  end
+
   # def test_worst_season
   #
   # end
