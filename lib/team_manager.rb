@@ -12,6 +12,10 @@ class TeamManager
     @games = load_data(data, Game)
   end
 
+  def info_by_id(team_id)
+    all_teams_info[team_id]
+  end
+
   def best_season
 
     # Description: Season with the highest win percentage for a team.
@@ -51,10 +55,6 @@ class TeamManager
 #     #              against the given team.
 #     # Return Value: String
 #   end
-
-def info_by_id(team_id)
-  all_teams_info[team_id]
-end
 
 def all_teams_info
   @teams.each_with_object(Hash.new { |hash, key| hash[key] =  0}) do |team, ids|
