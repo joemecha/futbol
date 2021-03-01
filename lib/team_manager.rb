@@ -32,14 +32,6 @@ class TeamManager
     winning_percents_by_season.key(winning_percents_by_season.values.min).to_s
   end
 
-  def team_all_games_by_season(team_id)
-    @game_manager.games_by_season.transform_values! do |array|
-      array.find_all do |game|
-        game.home_team_id == team_id || game.away_team_id == team_id
-      end
-    end
-  end
-
 def average_win_percentage(team_id)
   wins = @game_teams.find_all do |game|
     game.team_id == team_id && game.result == "WIN"
@@ -86,6 +78,14 @@ end
       team.team_id == desired_id
     end
     matching_id.team_name
+  end
+
+  def team_all_games_by_season(team_id)
+    @game_manager.games_by_season.transform_values! do |array|
+      array.find_all do |game|
+        game.home_team_id == team_id || game.away_team_id == team_id
+      end
+    end
   end
 
   def seasonal_win_percentage(array)
