@@ -81,4 +81,28 @@ class StatTrackerTest < Minitest::Test
   def test_lowest_scoring_home_team
     assert_equal 'Utah Royals FC', @tracker.lowest_scoring_home_team
   end
+
+  def test_winningest_coach
+    assert_equal "Dan Lacroix", @tracker.winningest_coach(20122013)
+  end
+
+  def test_worst_coach
+    assert_equal "Martin Raymond", @tracker.worst_coach(20122013)
+  end
+
+  def test_most_accurate_team
+    assert_equal "DC United", @tracker.most_accurate_team(20122013)
+  end
+
+  def test_least_accurate_team
+    assert_equal "New York City FC", @tracker.least_accurate_team(20122013)
+  end
+
+  def test_most_tackles
+    assert_equal "FC Cincinnati", @tracker.most_tackles(20122013)
+  end
+
+  def test_fewest_tackles
+    assert_equal "Atlanta United", @tracker.fewest_tackles(20122013)
+  end
 end

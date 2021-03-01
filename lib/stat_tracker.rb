@@ -12,6 +12,7 @@ class StatTracker
     @game_manager = GameManager.new(locations[:games])
     @team_manager = TeamManager.new(locations[:teams])
     @league_stats = LeagueStatistics.new(locations)
+    @season_stats = SeasonStatistics.new(locations)
   end
 
   def highest_total_score
@@ -72,5 +73,29 @@ class StatTracker
 
   def lowest_scoring_home_team
     @team_manager.team_name_by_id(@league_stats.least_home_goals_by_team)
+  end
+
+  def winningest_coach(season_id)
+    @season_stats.retained_coach(season_id)
+  end
+
+  def worst_coach(season_id)
+    @season_stats.fired_coach(season_id)
+  end
+
+  def most_accurate_team(season_id)
+    @team_manager.team_name_by_id(@season_stats.best_shot_ratio(season_id))
+  end
+
+  def least_accurate_team(season_id)
+    @team_manager.team_name_by_id(@season_stats.worst_shot_ratio(season_id))
+  end
+
+  def most_tackles(season_id)
+    @team_manager.team_name_by_id(@season_stats.most_tickles(season_id))
+  end
+
+  def fewest_tackles(season_id)
+    @team_manager.team_name_by_id(@season_stats.fewest_tickles(season_id))
   end
 end
