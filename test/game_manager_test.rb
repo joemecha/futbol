@@ -67,6 +67,7 @@ class GameManagerTest < Minitest::Test
   end
 
   def test_games_by_season
+    @game_manager.games_by_season
     assert_equal 20122013, @game_manager.games_by_season.keys.first
   end
 end
