@@ -8,6 +8,7 @@ class TeamManagerTest < Minitest::Test
               game_teams: './data/game_teams.csv'
             }
     @team_manager = TeamManager.new(@data)
+    @game_manager = GameManager.new(@data[:games])
   end
 
   def test_it_exists
@@ -27,14 +28,13 @@ class TeamManagerTest < Minitest::Test
   end
 
   def test_best_season
-    # skip
-    assert_equal "20132014", @team_manager.best_season(6)
+    assert_equal "20162017", @team_manager.best_season(6)
   end
 
-  # def test_worst_season
-  #
-  # end
-  #
+  def test_worst_season
+    assert_equal "20142015", @team_manager.worst_season(6)
+  end
+
   # def test_average_win_percentage
   #
   # end
@@ -62,5 +62,12 @@ class TeamManagerTest < Minitest::Test
   def test_team_name_by_id
     assert_equal 'Sporting Kansas City', @team_manager.team_name_by_id(5)
     assert_equal 'DC United', @team_manager.team_name_by_id(14)
+  end
+
+  def test_seasonal_win_percentage
+    array = mock
+    array.stubs(:each).returns(@game_manager.games)
+
+    assert_instance_of Float, @team_manager.seasonal_win_percentage(array)
   end
 end

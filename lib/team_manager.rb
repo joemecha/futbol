@@ -18,43 +18,27 @@ class TeamManager
 
   def best_season(team_id)
     seasons = team_all_games_by_season(team_id)
-    winning_percents_by_season = seasons.transform_values do |season|
-      winning_percentage(team_id) # build identical helper method that takes an array as arg
+    winning_percents_by_season = seasons.transform_values do |season_games|
+      seasonal_win_percentage(season_games)
     end
-    require "pry"; binding.pry
-
-
-
-
-    # t = seasons.transform_values do |array|
-    #   array.each_with_object(Hash.new { |hash, key| hash[key] = {wins: 0, games: 0}}) do |game, wins|
-    #
-    #     wins[game.season][:games] += 1
-    #     all_winning_games(team_id).each do |game_team|
-    #       wins[game.season][:wins] += 1 if game.game_id == game_team.game_id
-    #     end
-    #   end
-    # end
-
-
-    # season key => [all games in a season]
-
+    winning_percents_by_season.key(winning_percents_by_season.values.max).to_s
   end
 
-def team_all_games_by_season(team_id)
-  @game_manager.games_by_season.transform_values! do |array|
-    array.find_all do |game|
-      game.home_team_id == team_id || game.away_team_id == team_id
+  def worst_season(team_id)
+    seasons = team_all_games_by_season(team_id)
+    winning_percents_by_season = seasons.transform_values do |season_games|
+      seasonal_win_percentage(season_games)
+    end
+    winning_percents_by_season.key(winning_percents_by_season.values.min).to_s
+  end
+
+  def team_all_games_by_season(team_id)
+    @game_manager.games_by_season.transform_values! do |array|
+      array.find_all do |game|
+        game.home_team_id == team_id || game.away_team_id == team_id
+      end
     end
   end
-end
-
-
-#   def worst_season
-#     # Description: Season with the lowest win percentage for a team.
-#     # Return Value: String
-#   end
-#
 
 def average_win_percentage(team_id)
   wins = @game_teams.find_all do |game|
@@ -102,5 +86,17 @@ end
       team.team_id == desired_id
     end
     matching_id.team_name
+  end
+
+  def seasonal_win_percentage(array)
+    total_games = 0
+    wins = 0
+    array.each do |game|
+      total_games += 1
+      @game_teams.each do |game_team|
+        wins += 1 if game_team.game_id == game.game_id && game_team.result == "WIN"
+      end
+    end
+    ((wins.to_f / total_games) * 100).round(2)
   end
 end
