@@ -44,6 +44,14 @@ class TeamManagerTest < Minitest::Test
   #
   # end
 
+  def test_info_by_id
+    assert_equal ({:team_id=>6, :franchise_id=>6, :team_name=>"FC Dallas", :abbreviation=>"DAL", :link=>"/api/v1/teams/6"}),@team_manager.info_by_id(6)
+  end
+
+  def test_all_teams_info
+    assert_instance_of Hash, @team_manager.all_teams_info
+  end
+
   def test_team_name_by_id
     assert_equal 'Sporting Kansas City', @team_manager.team_name_by_id(5)
     assert_equal 'DC United', @team_manager.team_name_by_id(14)
