@@ -8,6 +8,8 @@ class TeamManager
 
   def initialize(data)
     @teams = load_data(data, Team)
+    @game_teams = load_data(data, GameTeam)
+    @games = load_data(data, Game)
   end
 
   def best_season
@@ -49,6 +51,16 @@ class TeamManager
 #     #              against the given team.
 #     # Return Value: String
 #   end
+
+def info_by_id(team_id)
+  all_teams_info[team_id]
+end
+
+def all_teams_info
+  @teams.each_with_object(Hash.new { |hash, key| hash[key] =  0}) do |team, ids|
+    ids[team.team_id] = team.team_info
+  end
+end
 
   def team_name_by_id(desired_id)
     matching_id = @teams.find do |team|
