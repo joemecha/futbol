@@ -20,29 +20,29 @@ class TeamManagerTest < Minitest::Test
     assert_equal ({:team_id=>6, :franchise_id=>6, :team_name=>"FC Dallas", :abbreviation=>"DAL", :link=>"/api/v1/teams/6"}),@team_manager.info_by_id(6)
   end
 
-  def test_average_win_percentage
-    assert_equal 49.22, @team_manager.average_win_percentage(6)
+  def test_mean_win_percentage
+    assert_equal 49.22, @team_manager.mean_win_percentage(6)
   end
 
   def test_all_games_by_season
     assert_instance_of Hash, @team_manager.team_all_games_by_season(1)
   end
 
-  def test_best_season
-    assert_equal "20162017", @team_manager.best_season(6)
+  def test_greatest_season
+    assert_equal "20162017", @team_manager.greatest_season(6)
   end
 
-  def test_worst_season
-    assert_equal "20142015", @team_manager.worst_season(6)
+  def test_most_terrible_season
+    assert_equal "20142015", @team_manager.most_terrible_season(6)
   end
 
 
-  def test_most_goals_scored
-    assert_equal 6, @team_manager.most_goals_scored(14)
+  def test_highest_goals_scored
+    assert_equal 6, @team_manager.highest_goals_scored(14)
   end
 
-  def test_fewest_goals_scored
-    assert_equal 0, @team_manager.fewest_goals_scored(6)
+  def test_least_goals_scored
+    assert_equal 0, @team_manager.least_goals_scored(6)
   end
 
   def test_all_teams_info
@@ -59,5 +59,13 @@ class TeamManagerTest < Minitest::Test
     array.stubs(:each).returns(@game_manager.games)
 
     assert_instance_of Float, @team_manager.seasonal_win_percentage(array)
+  end
+
+  def test_toughest_opponent
+    assert_equal 28, @team_manager.toughest_opponent(26)
+  end
+
+  def test_easiest_opponent
+    assert_equal 10, @team_manager.easiest_opponent(7)
   end
 end

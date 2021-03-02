@@ -105,4 +105,36 @@ class StatTrackerTest < Minitest::Test
   def test_fewest_tackles
     assert_equal "Atlanta United", @tracker.fewest_tackles(20122013)
   end
+
+  def test_team_info
+    assert_equal ({:team_id=>6, :franchise_id=>6, :team_name=>"FC Dallas", :abbreviation=>"DAL", :link=>"/api/v1/teams/6"}), @tracker.team_info(6)
+  end
+
+  def test_best_season
+    assert_equal "20162017", @tracker.best_season(6)
+  end
+
+  def test_worst_season
+    assert_equal "20142015", @tracker.worst_season(6)
+  end
+
+  def test_average_win_percentage
+    assert_equal 49.22, @tracker.average_win_percentage(6)
+  end
+
+  def test_most_goals_scored
+    assert_equal 6, @tracker.most_goals_scored(14)
+  end
+
+  def test_fewest_goals_scored
+    assert_equal 0, @tracker.fewest_goals_scored(6)
+  end
+
+  def test_favorite_opponent
+    assert_equal "North Carolina Courage", @tracker.favorite_opponent(7)
+  end
+
+  def test_rival
+    assert_equal "Los Angeles FC", @tracker.rival(26)
+  end
 end

@@ -55,7 +55,6 @@ class SeasonStatistics
       goals[game_team.team_id][:goals] += game_team.goals
       goals[game_team.team_id][:shots] += game_team.shots
     end
-    require "pry"; binding.pry
     shots_and_goals.transform_values! do |results|
       (results[:goals].to_f / results[:shots]).round(4)
     end.key(shots_and_goals.values.min)
