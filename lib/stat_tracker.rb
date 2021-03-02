@@ -10,7 +10,7 @@ class StatTracker
 
   def initialize(locations)
     @game_manager = GameManager.new(locations[:games])
-    @team_manager = TeamManager.new(locations[:teams])
+    @team_manager = TeamManager.new(locations)
     @league_stats = LeagueStatistics.new(locations)
     @season_stats = SeasonStatistics.new(locations)
   end
@@ -46,7 +46,7 @@ class StatTracker
   def average_goals_by_season
     @game_manager.average_scores_by_season
   end
-#=====================================
+
   def count_of_teams
     @league_stats.number_of_teams
   end
@@ -97,5 +97,37 @@ class StatTracker
 
   def fewest_tackles(season_id)
     @team_manager.team_name_by_id(@season_stats.fewest_tickles(season_id))
+  end
+
+  def team_info(team_id)
+    @team_manager.info_by_id(team_id)
+  end
+
+  def best_season(team_id)
+    @team_manager.greatest_season(team_id)
+  end
+
+  def worst_season(team_id)
+    @team_manager.most_terrible_season(team_id)
+  end
+
+  def average_win_percentage(team_id)
+    @team_manager.mean_win_percentage(team_id)
+  end
+
+  def most_goals_scored(team_id)
+    @team_manager.highest_goals_scored(team_id)
+  end
+
+  def fewest_goals_scored(team_id)
+    @team_manager.least_goals_scored(team_id)
+  end
+
+  def favorite_opponent(team_id)
+    @team_manager.easiest_opponent(team_id)
+  end
+
+  def rival(team_id)
+    @team_manager.toughest_opponent(team_id)
   end
 end
