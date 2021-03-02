@@ -3,9 +3,13 @@ require "./test/test_helper"
 class TeamManagerTest < Minitest::Test
 
   def setup
-    @team_data = './data/teams.csv'
+    @data = { games: './data/games.csv',
+              teams: './data/teams.csv',
+              game_teams: './data/game_teams.csv'
+            }
+    @team_manager = TeamManager.new(@data)
 
-    @team_manager = TeamManager.new(@team_data)
+    @game_manager = GameManager.new(@data[:game_teams])
   end
 
   def test_it_exists
@@ -16,6 +20,17 @@ class TeamManagerTest < Minitest::Test
     assert_equal ({:team_id=>6, :franchise_id=>6, :team_name=>"FC Dallas", :abbreviation=>"DAL", :link=>"/api/v1/teams/6"}),@team_manager.info_by_id(6)
   end
 
+  def test_most_goals_scored
+    assert_equal 6, @team_manager.most_goals_scored(14)
+  end
+
+  def test_fewest_goals_scored
+    assert_equal 0, @team_manager.fewest_goals_scored(6)
+  end
+  #
+  # def test_team_game_info
+  #   assert_equal 0, @team_manager.team_game_info
+  # end
   # def test_team_info
   #
   # end
