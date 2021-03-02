@@ -9,6 +9,7 @@ class TeamManagerTest < Minitest::Test
             }
     @team_manager = TeamManager.new(@data)
     @game_manager = GameManager.new(@data[:games])
+
   end
 
   def test_it_exists
@@ -35,25 +36,14 @@ class TeamManagerTest < Minitest::Test
     assert_equal "20142015", @team_manager.worst_season(6)
   end
 
-  # def test_average_win_percentage
-  #
-  # end
-  #
-  # def test_most_goals_scored
-  #
-  # end
-  #
-  # def test_fewest_goals_scored
-  #
-  # end
-  #
-  # def test_favorite_opponent
-  #
-  # end
-  #
-  # def test_rival
-  #
-  # end
+
+  def test_most_goals_scored
+    assert_equal 6, @team_manager.most_goals_scored(14)
+  end
+
+  def test_fewest_goals_scored
+    assert_equal 0, @team_manager.fewest_goals_scored(6)
+  end
 
   def test_all_teams_info
     assert_instance_of Hash, @team_manager.all_teams_info
