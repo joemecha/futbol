@@ -17,4 +17,6 @@ class GameTeamManagerTest < Minitest::Test
   #   @game_team_manager.stub[:game_teams].returns["yes", "no", "maybeso", "stubbedmytoeonacheerio"]
   #   assert_equal [], @game_team_manager.game_teams
   # end
+
+
 end

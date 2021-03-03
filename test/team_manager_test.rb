@@ -62,10 +62,14 @@ class TeamManagerTest < Minitest::Test
   end
 
   def test_toughest_opponent
-    assert_equal 28, @team_manager.toughest_opponent(26)
+    assert_equal "Los Angeles FC", @team_manager.toughest_opponent(26)
   end
 
   def test_easiest_opponent
-    assert_equal 10, @team_manager.easiest_opponent(7)
+    assert_equal "North Carolina Courage", @team_manager.easiest_opponent(7)
+  end
+
+  def test_number_of_teams
+    assert_equal 32, @team_manager.number_of_teams
   end
 end
