@@ -18,33 +18,33 @@ class GameManagerTest < Minitest::Test
   end
 
   def test_home_wins
-    assert_instance_of Array, @game_manager.home_wins
+    assert_equal 24, @game_manager.home_wins
   end
 
   def test_away_wins
-    assert_instance_of Array, @game_manager.away_wins
+    assert_equal 0, @game_manager.away_wins
   end
 
   def test_ties
-    assert_instance_of Array, @game_manager.ties
+    assert_equal 13, @game_manager.ties
   end
 
   def test_calculate_percentage_home_wins
-    @game_manager.stubs(:home_wins).returns([1, 2])
+    @game_manager.stubs(:home_wins).returns(2)
     @game_manager.stubs(:games).returns([1, 2, 3])
 
     assert_equal 66.67, @game_manager.calculate_percentage_home_wins
   end
 
   def test_calculate_percentage_away_wins
-    @game_manager.stubs(:away_wins).returns([1, 2])
+    @game_manager.stubs(:away_wins).returns(2)
     @game_manager.stubs(:games).returns([1, 2, 3])
 
     assert_equal 66.67, @game_manager.calculate_percentage_away_wins
   end
 
   def test_calculate_percentage_ties
-    @game_manager.stubs(:ties).returns([1, 2])
+    @game_manager.stubs(:ties).returns(2)
     @game_manager.stubs(:games).returns([1, 2, 3])
 
     assert_equal 66.67, @game_manager.calculate_percentage_ties

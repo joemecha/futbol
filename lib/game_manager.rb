@@ -1,8 +1,10 @@
 require_relative 'game'
 require_relative 'data_loadable'
+require_relative 'mathable'
 
 class GameManager
   include DataLoadable
+  include Mathable
 
   attr_reader :games
 
@@ -25,31 +27,31 @@ class GameManager
   def home_wins
     @games.find_all do |game|
       game.winner == :home
-    end
+    end.count
   end
 
   def away_wins
     @games.find_all do |game|
       game.winner == :away
-    end
+    end.count
   end
 
   def ties
     @games.find_all do |game|
       game.winner == :tie
-    end
+    end.count
   end
 
   def calculate_percentage_home_wins
-    ((home_wins.count.to_f / games.count) * 100).round(2)
+    percent(home_wins, games.count)
   end
 
   def calculate_percentage_away_wins
-    ((away_wins.count.to_f / games.count) * 100).round(2)
+    percent(away_wins, games.count)
   end
 
-  def calculate_percentage_ties
-    ((ties.count.to_f / games.count) * 100).round(2)
+    def calculate_percentage_ties
+    percent(ties, games.count)
   end
 
   def number_of_season_games
@@ -69,7 +71,7 @@ class GameManager
     @games.each do |game|
       all_goals += game.total_score
     end
-     (all_goals.to_f / games.count).round(2)
+    ratio(all_goals, games.count)
   end
 
   def average_scores_by_season
@@ -77,7 +79,7 @@ class GameManager
       avg = array.map do |game|
         game.total_score
       end.sum
-      (avg.to_f / array.length).round(2)
+      ratio(avg, array.length)
     end
   end
 
@@ -129,7 +131,7 @@ class GameManager
 
     # divide values by number of games for average
     j = ids_and_total_goals.merge!(team_total_games) do |team_id, total_goals, total_games|
-      (total_goals.to_f / total_games).round(2)
+      ratio(total_goals, total_games)
     end
 
     # last, find max
@@ -175,7 +177,7 @@ class GameManager
 
     # divide values by number of games for average
     j = ids_and_total_goals.merge!(team_total_games) do |team_id, total_goals, total_games|
-      (total_goals.to_f / total_games).round(2)
+      ratio(total_goals, total_games)
     end
 
     # last, find min
@@ -192,7 +194,7 @@ class GameManager
       total_goals = array.map do |game|
         game.away_goals
       end.sum
-      (total_goals.to_f / array.count).round(2)
+      ratio(total_goals, array.count)
     end
     average_goals_by_team.key(average_goals_by_team.values.max)
   end
@@ -207,7 +209,7 @@ class GameManager
       total_goals = array.map do |game|
         game.home_goals
       end.sum
-      (total_goals.to_f / array.count).round(2)
+      ratio(total_goals, array.count)
     end
     average_goals_by_team.key(average_goals_by_team.values.max)
   end
@@ -222,7 +224,7 @@ class GameManager
       total_goals = array.map do |game|
         game.away_goals
       end.sum
-      (total_goals.to_f / array.count).round(2)
+      ratio(total_goals, array.count)
     end
     average_goals_by_team.key(average_goals_by_team.values.min)
   end
@@ -237,7 +239,7 @@ class GameManager
       total_goals = array.map do |game|
         game.home_goals
       end.sum
-      (total_goals.to_f / array.count).round(2)
+      ratio(total_goals, array.count)
     end
     average_goals_by_team.key(average_goals_by_team.values.min)
   end
