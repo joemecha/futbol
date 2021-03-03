@@ -45,7 +45,7 @@ class SeasonStatisticsTest < Minitest::Test
 
   def test_correct_array
     current_season = @season_stats.seasons_and_games(20122013)
-    
+
     @season_stats.correct_array(current_season).each do |game_team|
       assert_instance_of GameTeam, game_team
     end

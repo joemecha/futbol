@@ -1,12 +1,12 @@
+require "simplecov"
+
+SimpleCov.start
+
 require 'pry'
 require "minitest/autorun"
 require "minitest/pride"
 require "mocha/minitest"
 require "csv"
-require "simplecov"
-
-SimpleCov.start
-
 
 require './lib/data_loadable'
 require "./lib/game_team"

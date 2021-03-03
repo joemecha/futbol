@@ -11,7 +11,7 @@ class StatTracker
   def initialize(locations)
     @game_manager = GameManager.new(locations[:games])
     @team_manager = TeamManager.new(locations)
-    @league_stats = LeagueStatistics.new(locations)
+    # @league_stats = LeagueStatistics.new(locations)
     @season_stats = SeasonStatistics.new(locations)
   end
 
@@ -48,31 +48,31 @@ class StatTracker
   end
 
   def count_of_teams
-    @league_stats.number_of_teams
+    @team_manager.number_of_teams
   end
 
   def best_offense
-    @team_manager.team_name_by_id(@league_stats.best_attackers)
+    @team_manager.team_name_by_id(@game_manager.best_attackers)
   end
 
   def worst_offense
-    @team_manager.team_name_by_id(@league_stats.worst_attackers)
+    @team_manager.team_name_by_id(@game_manager.worst_attackers)
   end
 
   def highest_scoring_visitor
-    @team_manager.team_name_by_id(@league_stats.most_goals_by_away_team)
+    @team_manager.team_name_by_id(@game_manager.most_goals_by_away_team)
   end
 
   def highest_scoring_home_team
-    @team_manager.team_name_by_id(@league_stats.most_home_goals_by_team)
+    @team_manager.team_name_by_id(@game_manager.most_home_goals_by_team)
   end
 
   def lowest_scoring_visitor
-    @team_manager.team_name_by_id(@league_stats.least_visitor_goals_by_team)
+    @team_manager.team_name_by_id(@game_manager.least_visitor_goals_by_team)
   end
 
   def lowest_scoring_home_team
-    @team_manager.team_name_by_id(@league_stats.least_home_goals_by_team)
+    @team_manager.team_name_by_id(@game_manager.least_home_goals_by_team)
   end
 
   def winningest_coach(season_id)

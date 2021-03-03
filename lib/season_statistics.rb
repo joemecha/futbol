@@ -63,21 +63,21 @@ class SeasonStatistics
   def most_tickles(season_id)
     current_season = seasons_and_games(season_id)
 
-    tackles = correct_array(current_season).each_with_object(Hash.new { |hash, key| hash[key] = 0}) do |game_team, tackles|
+    tack = correct_array(current_season).each_with_object(Hash.new { |hash, key| hash[key] = 0}) do |game_team, tackles|
       tackles[game_team.team_id] += game_team.tackles
     end
 
-    tackles.key(tackles.values.max)
+    tack.key(tack.values.max)
   end
 
   def fewest_tickles(season_id)
     current_season = seasons_and_games(season_id)
 
-    tackles = correct_array(current_season).each_with_object(Hash.new { |hash, key| hash[key] = 0}) do |game_team, tackles|
+    tack = correct_array(current_season).each_with_object(Hash.new { |hash, key| hash[key] = 0}) do |game_team, tackles|
       tackles[game_team.team_id] += game_team.tackles
     end
 
-    tackles.key(tackles.values.min)
+    tack.key(tack.values.min)
   end
 
   def seasons_and_games(season_id)

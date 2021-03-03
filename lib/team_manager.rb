@@ -94,36 +94,40 @@ class TeamManager
   end
 
 
-    def all_teams_info
-      @teams.each_with_object(Hash.new { |hash, key| hash[key] =  0}) do |team, ids|
-        ids[team.team_id] = team.team_info
-      end
-    end
-
-    def team_name_by_id(desired_id)
-      matching_id = @teams.find do |team|
-        team.team_id == desired_id
-      end
-      matching_id.team_name
-    end
-
-    def team_all_games_by_season(team_id)
-      @game_manager.games_by_season.transform_values! do |array|
-        array.find_all do |game|
-          game.home_team_id == team_id || game.away_team_id == team_id
-        end
-      end
-    end
-
-    def seasonal_win_percentage(array)
-      total_games = 0
-      wins = 0
-      array.each do |game|
-        total_games += 1
-        @game_teams.each do |game_team|
-          wins += 1 if game_team.game_id == game.game_id && game_team.result == "WIN"
-        end
-      end
-      ((wins.to_f / total_games) * 100).round(2)
+  def all_teams_info
+    @teams.each_with_object(Hash.new { |hash, key| hash[key] =  0}) do |team, ids|
+      ids[team.team_id] = team.team_info
     end
   end
+
+  def team_name_by_id(desired_id)
+    matching_id = @teams.find do |team|
+      team.team_id == desired_id
+    end
+    matching_id.team_name
+  end
+
+  def team_all_games_by_season(team_id)
+    @game_manager.games_by_season.transform_values! do |array|
+      array.find_all do |game|
+        game.home_team_id == team_id || game.away_team_id == team_id
+      end
+    end
+  end
+
+  def seasonal_win_percentage(array)
+    total_games = 0
+    wins = 0
+    array.each do |game|
+      total_games += 1
+      @game_teams.each do |game_team|
+        wins += 1 if game_team.game_id == game.game_id && game_team.result == "WIN"
+      end
+    end
+    ((wins.to_f / total_games) * 100).round(2)
+  end
+
+  def number_of_teams
+    @teams.count
+  end
+end

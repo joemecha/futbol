@@ -70,4 +70,29 @@ class GameManagerTest < Minitest::Test
     @game_manager.games_by_season
     assert_equal 20122013, @game_manager.games_by_season.keys.first
   end
+
+  # League Statistics Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  def test_best_attackers
+    assert_equal 27, @game_manager.best_attackers
+  end
+
+  def test_worst_attackers
+    assert_equal 16, @game_manager.worst_attackers
+  end
+
+  def test_most_goals_by_away_team
+    assert_equal 28, @game_manager.most_goals_by_away_team
+  end
+
+  def test_most_home_goals_by_team
+    assert_equal 27, @game_manager.most_home_goals_by_team
+  end
+
+  def test_least_visitor_goals_by_team
+    assert_equal 20, @game_manager.least_visitor_goals_by_team
+  end
+
+  def test_least_home_goals_by_team
+    assert_equal 2, @game_manager.least_home_goals_by_team
+  end
 end
